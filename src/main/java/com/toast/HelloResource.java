@@ -11,7 +11,14 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.AsyncRestTemplate;
 import org.springframework.web.context.request.async.DeferredResult;
 import rx.Observable;
-
+/*
+both hello1 hello2 hello3 did the some thing with different ways.
+first it make a call to check the server status(only check http stats code for demo),
+then make two more call and aggregate the result together(only the length of each payload for demo)
+hello1 use raw java future, which is blocking
+hello2 use CompletableFuture which no longer blocking, however the aggregate payload is kind of messy
+hello3 use RX Observable, which is very easy for aggregate the payload
+ */
 @RestController
 public class HelloResource {
 
