@@ -1,4 +1,4 @@
-package com.toast;
+package com.toast.future.and.observable.and.completablefutuer.demo;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.AsyncRestTemplate;
 import org.springframework.web.context.request.async.DeferredResult;
 import rx.Observable;
+
 /*
 both hello1 hello2 hello3 did the some thing with different ways.
 first it make a call to check the server status(only check http stats code for demo),
