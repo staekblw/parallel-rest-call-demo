@@ -2,6 +2,7 @@ package com.toast.observable.demo.api.service;
 
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.toast.observable.demo.api.model.Pen;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.util.concurrent.ListenableFuture;
@@ -11,8 +12,12 @@ import rx.Observable;
 
 @Component
 public class PenService {
+    private AsyncRestTemplate template ;
 
-    private AsyncRestTemplate template = new AsyncRestTemplate();
+    @Autowired
+    public PenService(AsyncRestTemplate template) {
+        this.template = template;
+    }
 
     @HystrixCommand(fallbackMethod = "fallBack")
     public Observable<Pen> by(String id) {

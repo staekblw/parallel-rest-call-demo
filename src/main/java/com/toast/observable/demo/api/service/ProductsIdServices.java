@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.netflix.hystrix.HystrixCommandGroupKey;
 import com.netflix.hystrix.HystrixObservableCommand;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.util.concurrent.ListenableFuture;
@@ -17,7 +18,12 @@ import rx.Observable;
 @Component
 public class ProductsIdServices {
 
-    private AsyncRestTemplate template = new AsyncRestTemplate();
+    private AsyncRestTemplate template;
+
+    @Autowired
+    public ProductsIdServices(AsyncRestTemplate template) {
+        this.template = template;
+    }
 
     public Observable<List<String>> getProductIds() {
         return new GetProductIdsCommand("product").toObservable();
@@ -30,7 +36,6 @@ public class ProductsIdServices {
 
         @Override
         protected Observable construct() {
-            System.out.println("**********LINBO");
             return Observable.create(x -> {
                 ListenableFuture<ResponseEntity<String>> listenableFuture = template.getForEntity("1http://www.baidu.com1", String.class);
                 listenableFuture.addCallback(new ListenableFutureCallback<ResponseEntity<String>>() {

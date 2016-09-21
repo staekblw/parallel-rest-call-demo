@@ -3,15 +3,22 @@ package com.toast.observable.demo.api.service;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.toast.observable.demo.api.model.Book;
 import com.toast.observable.demo.api.model.Pen;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.util.concurrent.ListenableFuture;
 import org.springframework.util.concurrent.ListenableFutureCallback;
 import org.springframework.web.client.AsyncRestTemplate;
 import rx.Observable;
+
 @Component
 public class BookService {
-    private AsyncRestTemplate template = new AsyncRestTemplate();
+    private AsyncRestTemplate template;
+
+    @Autowired
+    public BookService(AsyncRestTemplate template) {
+        this.template = template;
+    }
 
     @HystrixCommand(fallbackMethod = "fallBack")
     public Observable<Book> by(String id) {

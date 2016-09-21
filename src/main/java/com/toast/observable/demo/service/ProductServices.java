@@ -37,7 +37,7 @@ public class ProductServices {
                     books(id),//
                     pens(id),//
                     (books, pens) -> {
-                        return new ProductsResponse(books, pens.stream().filter(x -> x != null).collect(Collectors.toList()));
+                        return new ProductsResponse(books, pens.stream().collect(Collectors.toList()));
                     });
         }).flatMap(products -> products);
     }

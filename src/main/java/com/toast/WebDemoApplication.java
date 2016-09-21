@@ -8,8 +8,7 @@ import org.springframework.cloud.netflix.hystrix.EnableHystrix;
 @EnableHystrix
 @SpringBootApplication
 public class WebDemoApplication {
-
-	public static void main(String[] args) {
-		SpringApplication.run(WebDemoApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(WebDemoApplication.class, args);
+    }
 }
